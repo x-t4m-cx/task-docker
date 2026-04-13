@@ -1,0 +1,31 @@
+от вас сейчас нужно 3 шага:
+
+Запушить изменения в ветку и открыть Pull Request — pipeline стартует автоматически.
+В репозитории GitHub добавить secrets для Docker Hub.
+Убедиться, что имя образа в workflow вам подходит (tasks-app) или поменять.
+Где добавить secrets в GitHub
+В вашем репозитории:
+
+Settings → Secrets and variables → Actions → New repository secret
+Создайте 2 секрета:
+
+DOCKERHUB_USERNAME
+DOCKERHUB_TOKEN
+Какие значения подставить
+DOCKERHUB_USERNAME = ваш логин в Docker Hub (например ivanpetrov)
+DOCKERHUB_TOKEN = Access Token из Docker Hub (не пароль)
+Где взять Docker Hub token
+В Docker Hub:
+
+Account Settings → Security → New Access Token
+Название любое, например github-actions
+Права обычно Read, Write, Delete (минимум нужен Write для push)
+Скопируйте токен сразу после создания и вставьте в DOCKERHUB_TOKEN
+Проверка
+После добавления секретов:
+
+Обновите PR (любой новый commit/push)
+В Actions должны пройти build/lint/test/docker_build
+docker_push выполнится, если PR не из fork и секреты заданы
+Образ появится в Docker Hub с тегом вида pr-<номер_PR>-<short_sha>
+Если хотите, могу сразу подправить workflow так, чтобы push делался только для PR в main (или только после merge), если это ваш целевой сценарий.
