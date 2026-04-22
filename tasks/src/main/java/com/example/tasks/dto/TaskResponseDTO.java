@@ -1,7 +1,11 @@
 package com.example.tasks.dto;
 
 import com.example.tasks.model.TaskPriority;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 

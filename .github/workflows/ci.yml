@@ -1,10 +1,6 @@
 name: CI/CD
-
 on:
   pull_request:
-    branches:
-      - "**"
-  push:
     branches:
       - "**"
 jobs:
@@ -92,7 +88,7 @@ jobs:
     name: Docker Push
     runs-on: ubuntu-latest
     needs: [docker_build]
-    if: ${{ github.event.pull_request.head.repo.fork == false && secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
+    if: github.event.pull_request.head.repo.fork == false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -114,4 +110,4 @@ jobs:
           context: ./tasks
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/tasks-app:pr-${{ github.event.pull_request.number }}-${{ steps.vars.outputs.short_sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/task-app:pr-${{ github.event.pull_request.number }}-${{ steps.vars.outputs.short_sha }}

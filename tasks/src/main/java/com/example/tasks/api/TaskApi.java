@@ -3,9 +3,6 @@ package com.example.tasks.api;
 import com.example.tasks.dto.TaskRequestDTO;
 import com.example.tasks.dto.TaskResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
